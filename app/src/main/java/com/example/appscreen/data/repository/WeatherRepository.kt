@@ -5,16 +5,13 @@ import com.example.appscreen.data.model.WeatherCondition
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
-import javax.inject.Singleton
 
 interface WeatherRepository {
     fun getWeather(): Flow<Weather>
     suspend fun refreshWeather()
 }
 
-@Singleton
-class WeatherRepositoryImpl @Inject constructor() : WeatherRepository {
+class WeatherRepositoryImpl : WeatherRepository {
     
     private var currentWeather = Weather(
         temperature = 25,

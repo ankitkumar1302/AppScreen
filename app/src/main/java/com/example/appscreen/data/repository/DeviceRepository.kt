@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
-import javax.inject.Singleton
 
 interface DeviceRepository {
     fun getDevices(): Flow<List<Device>>
@@ -22,8 +20,7 @@ interface DeviceRepository {
     fun getDeviceById(deviceId: String): Flow<Device?>
 }
 
-@Singleton
-class DeviceRepositoryImpl @Inject constructor() : DeviceRepository {
+class DeviceRepositoryImpl : DeviceRepository {
     
     private val _devices = MutableStateFlow(generateSampleDevices())
     private val devices = _devices.asStateFlow()

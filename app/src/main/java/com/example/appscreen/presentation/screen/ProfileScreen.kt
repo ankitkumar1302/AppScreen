@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.appscreen.ui.theme.*
 
+@ExperimentalMaterial3Api
 @Composable
 fun ProfileScreen(navController: NavController) {
     Column(
@@ -141,6 +142,7 @@ private fun ProfileStatItem(value: String, label: String) {
     }
 }
 
+@ExperimentalMaterial3Api
 @Composable
 private fun ProfileActionItem(
     icon: androidx.compose.ui.graphics.vector.ImageVector,

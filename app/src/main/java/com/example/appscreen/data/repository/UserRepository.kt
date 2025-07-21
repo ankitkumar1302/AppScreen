@@ -5,8 +5,6 @@ import com.example.appscreen.data.model.UserPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
-import javax.inject.Singleton
 
 interface UserRepository {
     fun getUser(): Flow<User>
@@ -14,8 +12,7 @@ interface UserRepository {
     suspend fun logout()
 }
 
-@Singleton
-class UserRepositoryImpl @Inject constructor() : UserRepository {
+class UserRepositoryImpl : UserRepository {
     
     private val _user = MutableStateFlow(
         User(

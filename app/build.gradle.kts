@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+//    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -51,15 +50,6 @@ android {
     }
 }
 
-// Add kapt configuration to fix JDK compatibility issues
-kapt {
-    correctErrorTypes = true
-    javacOptions {
-        // Increase the max count of errors from annotation processors.
-        option("-Xmaxerrs", 500)
-    }
-}
-
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -77,10 +67,10 @@ dependencies {
     
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    
-    // Hilt for dependency injection
-    implementation("com.google.dagger:hilt-android:2.48")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // Koin for dependency injection
+    implementation("io.insert-koin:koin-android:3.5.3")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
     
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -95,10 +85,6 @@ dependencies {
     // Room for local database
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
-    kapt("androidx.room:room-compiler:2.6.0")
-    
-    // Hilt compiler
-    kapt("com.google.dagger:hilt-compiler:2.48")
     
     // Extended Icons
     implementation("androidx.compose.material:material-icons-core:1.5.1")

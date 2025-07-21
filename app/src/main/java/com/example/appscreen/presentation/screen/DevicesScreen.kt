@@ -11,18 +11,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.appscreen.navigation.Screen
 import com.example.appscreen.presentation.component.DeviceCard
 import com.example.appscreen.presentation.viewmodel.HomeViewModel
 import com.example.appscreen.ui.theme.*
+import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DevicesScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = getViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     

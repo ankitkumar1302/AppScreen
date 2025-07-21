@@ -20,9 +20,7 @@ import com.example.appscreen.presentation.component.BottomNavigationBar
 import com.example.appscreen.ui.theme.AppScreenTheme
 import com.example.appscreen.ui.theme.GradientDarkEnd
 import com.example.appscreen.ui.theme.GradientDarkStart
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -7,10 +7,8 @@ import com.example.appscreen.data.model.DeviceCategory
 import com.example.appscreen.data.model.Weather
 import com.example.appscreen.data.repository.DeviceRepository
 import com.example.appscreen.data.repository.WeatherRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 data class HomeUiState(
     val weather: Weather? = null,
@@ -21,8 +19,7 @@ data class HomeUiState(
     val error: String? = null
 )
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel(
     private val deviceRepository: DeviceRepository,
     private val weatherRepository: WeatherRepository
 ) : ViewModel() {

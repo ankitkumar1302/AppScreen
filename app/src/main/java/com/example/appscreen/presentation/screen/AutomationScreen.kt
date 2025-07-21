@@ -173,21 +173,27 @@ private fun QuickAutomationActions() {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        QuickActionChip(
-            text = "Scenes",
-            icon = Icons.Filled.Dashboard,
-            onClick = { /* TODO */ }
-        )
-        QuickActionChip(
-            text = "Schedules",
-            icon = Icons.Filled.Schedule,
-            onClick = { /* TODO */ }
-        )
-        QuickActionChip(
-            text = "Triggers",
-            icon = Icons.Filled.FlashOn,
-            onClick = { /* TODO */ }
-        )
+        Box(Modifier.weight(1f)) {
+            QuickActionChip(
+                text = "Scenes",
+                icon = Icons.Filled.Dashboard,
+                onClick = { /* TODO */ }
+            )
+        }
+        Box(Modifier.weight(1f)) {
+            QuickActionChip(
+                text = "Schedules",
+                icon = Icons.Filled.Schedule,
+                onClick = { /* TODO */ }
+            )
+        }
+        Box(Modifier.weight(1f)) {
+            QuickActionChip(
+                text = "Triggers",
+                icon = Icons.Filled.FlashOn,
+                onClick = { /* TODO */ }
+            )
+        }
     }
 }
 
@@ -199,7 +205,7 @@ private fun QuickActionChip(
 ) {
     Card(
         modifier = Modifier
-            .weight(1f)
+            .fillMaxWidth()
             .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = SubtleCyan.copy(alpha = 0.2f))

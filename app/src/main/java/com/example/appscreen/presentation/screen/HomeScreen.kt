@@ -23,7 +23,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.unit.times
+
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.appscreen.data.model.Device
@@ -33,11 +34,12 @@ import com.example.appscreen.navigation.Screen
 import com.example.appscreen.presentation.component.DeviceCard
 import com.example.appscreen.presentation.viewmodel.HomeViewModel
 import com.example.appscreen.ui.theme.*
+import org.koin.androidx.compose.getViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = getViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     
@@ -254,6 +256,7 @@ private fun QuickActionCard(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DeviceCategoriesSection(
     categories: List<String>,
