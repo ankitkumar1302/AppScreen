@@ -289,7 +289,17 @@ private fun DevicesGridSection(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        modifier = Modifier.height((devices.size / 2 * 120 + (devices.size / 2 - 1) * 12).dp)
+        modifier = Modifier.height(
+            when {
+                devices.isEmpty() -> 0.dp
+                else -> {
+                    val rows = (devices.size + 1) / 2 // Ceiling division for 2 columns
+                    val itemHeight = 120.dp
+                    val spacing = 12.dp
+                    (rows * itemHeight + (rows - 1).coerceAtLeast(0) * spacing)
+                }
+            }
+        )
     ) {
         items(devices) { device ->
             DeviceCard(

@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -225,8 +226,3 @@ private fun DeviceInfoItem(label: String, value: String) {
         )
     }
 }
-
-@Composable
-private fun Modifier.scale(scale: Float): Modifier = this.then(
-    Modifier.size((24 * scale).dp)
-)

@@ -8,6 +8,7 @@ import com.example.appscreen.data.model.DeviceType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,14 +31,14 @@ class DeviceRepositoryImpl @Inject constructor() : DeviceRepository {
     override fun getDevices(): Flow<List<Device>> = devices
     
     override fun getDeviceCategories(): Flow<List<DeviceCategory>> {
-        return MutableStateFlow(
+        return _devices.map { deviceList ->
             listOf(
-                DeviceCategory("Living Room", _devices.value.filter { it.room == "Living Room" }),
-                DeviceCategory("Bedroom", _devices.value.filter { it.room == "Bedroom" }),
-                DeviceCategory("Kitchen", _devices.value.filter { it.room == "Kitchen" }),
-                DeviceCategory("Bathroom", _devices.value.filter { it.room == "Bathroom" })
+                DeviceCategory("Living Room", deviceList.filter { it.room == "Living Room" }),
+                DeviceCategory("Bedroom", deviceList.filter { it.room == "Bedroom" }),
+                DeviceCategory("Kitchen", deviceList.filter { it.room == "Kitchen" }),
+                DeviceCategory("Bathroom", deviceList.filter { it.room == "Bathroom" })
             )
-        ).asStateFlow()
+        }
     }
     
     override suspend fun toggleDevice(deviceId: String) {
@@ -65,7 +66,9 @@ class DeviceRepositoryImpl @Inject constructor() : DeviceRepository {
     }
     
     override fun getDeviceById(deviceId: String): Flow<Device?> {
-        return MutableStateFlow(_devices.value.find { it.id == deviceId }).asStateFlow()
+        return _devices.map { deviceList ->
+            deviceList.find { it.id == deviceId }
+        }
     }
     
     private fun generateSampleDevices(): List<Device> = listOf(
