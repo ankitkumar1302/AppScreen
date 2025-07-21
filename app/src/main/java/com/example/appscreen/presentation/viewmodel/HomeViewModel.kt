@@ -38,41 +38,45 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true) }
             
-            // Collect weather data
-            weatherRepository.getWeather()
-                .catch { e -> 
-                    _uiState.update { it.copy(error = e.message) }
+            // Use coroutineScope to ensure all operations complete before setting isLoading to false
+            try {
+                // Launch all data collection jobs in parallel
+                launch {
+                    // Collect weather data
+                    weatherRepository.getWeather()
+                        .catch { e -> 
+                            _uiState.update { it.copy(error = e.message) }
+                        }
+                        .collect { weather ->
+                            _uiState.update { it.copy(weather = weather) }
+                        }
                 }
-                .collect { weather ->
-                    _uiState.update { it.copy(weather = weather) }
+                
+                launch {
+                    // Collect devices
+                    deviceRepository.getDevices()
+                        .catch { e -> 
+                            _uiState.update { it.copy(error = e.message) }
+                        }
+                        .collect { devices ->
+                            _uiState.update { it.copy(devices = devices) }
+                        }
                 }
-        }
-        
-        viewModelScope.launch {
-            // Collect devices
-            deviceRepository.getDevices()
-                .catch { e -> 
-                    _uiState.update { it.copy(error = e.message) }
+                
+                launch {
+                    // Collect device categories
+                    deviceRepository.getDeviceCategories()
+                        .catch { e -> 
+                            _uiState.update { it.copy(error = e.message) }
+                        }
+                        .collect { categories ->
+                            _uiState.update { it.copy(deviceCategories = categories) }
+                        }
                 }
-                .collect { devices ->
-                    _uiState.update { 
-                        it.copy(
-                            devices = devices,
-                            isLoading = false
-                        ) 
-                    }
-                }
-        }
-        
-        viewModelScope.launch {
-            // Collect device categories
-            deviceRepository.getDeviceCategories()
-                .catch { e -> 
-                    _uiState.update { it.copy(error = e.message) }
-                }
-                .collect { categories ->
-                    _uiState.update { it.copy(deviceCategories = categories) }
-                }
+            } finally {
+                // Set loading to false only after all operations complete or fail
+                _uiState.update { it.copy(isLoading = false) }
+            }
         }
     }
     
