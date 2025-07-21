@@ -1,12 +1,26 @@
 package com.example.appscreen.presentation.screen
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -16,9 +30,11 @@ import androidx.navigation.NavController
 import com.example.appscreen.navigation.Screen
 import com.example.appscreen.presentation.component.DeviceCard
 import com.example.appscreen.presentation.viewmodel.HomeViewModel
-import com.example.appscreen.ui.theme.*
+import com.example.appscreen.ui.theme.DeepGrey
+import com.example.appscreen.ui.theme.GreyishTone
+import com.example.appscreen.ui.theme.SubtleCyan
+import com.example.appscreen.ui.theme.White
 import org.koin.androidx.compose.getViewModel
-import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DevicesScreen(
@@ -26,14 +42,14 @@ fun DevicesScreen(
     viewModel: HomeViewModel = getViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 16.dp)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -45,7 +61,7 @@ fun DevicesScreen(
                 color = White,
                 fontWeight = FontWeight.Bold
             )
-            
+
             IconButton(
                 onClick = { /* TODO: Add device */ }
             ) {
@@ -56,9 +72,9 @@ fun DevicesScreen(
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier.height(16.dp))
-        
+
         // Device Summary
         Card(
             modifier = Modifier.fillMaxWidth(),
@@ -84,9 +100,9 @@ fun DevicesScreen(
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier.height(24.dp))
-        
+
         // Device List by Room
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -100,7 +116,7 @@ fun DevicesScreen(
                         fontWeight = FontWeight.Medium
                     )
                 }
-                
+
                 items(category.devices.chunked(2)) { devicePair ->
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -124,7 +140,7 @@ fun DevicesScreen(
                         }
                     }
                 }
-                
+
                 item {
                     Spacer(modifier = Modifier.height(8.dp))
                 }

@@ -261,7 +261,7 @@ private fun getNotificationIcon(type: NotificationType): androidx.compose.ui.gra
     }
 }
 
-private fun getNotificationColor(type: NotificationType): androidx.compose.ui.graphics.Color {
+private fun getNotificationColor(type: NotificationType): Color {
     return when (type) {
         NotificationType.DEVICE -> SubtleCyan
         NotificationType.SECURITY -> Color.Red

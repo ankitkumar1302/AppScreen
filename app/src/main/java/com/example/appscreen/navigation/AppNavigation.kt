@@ -58,7 +58,7 @@ fun AppNavigation(
             EnergyScreen(navController)
         }
         composable(Screen.Security.route) {
-            SecurityScreen(navController)
+            SecurityScreen()
         }
         composable(Screen.Notifications.route) {
             NotificationsScreen(navController)

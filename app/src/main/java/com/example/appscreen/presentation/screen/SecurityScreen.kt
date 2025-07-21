@@ -15,11 +15,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.appscreen.ui.theme.*
 
 @Composable
-fun SecurityScreen(navController: NavController) {
+fun SecurityScreen() {
     var isArmed by remember { mutableStateOf(false) }
     
     LazyColumn(

@@ -16,4 +16,5 @@ val appModule = module {
     single<WeatherRepository> { WeatherRepositoryImpl() }
     // Register HomeViewModel for Compose & Koin DI
     viewModel { HomeViewModel(get(), get()) }
+
 }
